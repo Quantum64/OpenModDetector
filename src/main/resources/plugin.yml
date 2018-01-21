@@ -1,0 +1,5 @@
+name: OpenModDetector
+main: co.q64.omd.spigot.SpigotOpenModDetectorPlugin
+version: 1.0
+author: Quantum64
+commands:

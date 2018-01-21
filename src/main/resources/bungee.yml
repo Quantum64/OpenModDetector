@@ -1,0 +1,4 @@
+name: OpenModDetector
+main: co.q64.omd.proxy.ProxyOpenModDetectorPlugin
+version: 1.0
+author: Quantum64
