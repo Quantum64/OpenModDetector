@@ -1,4 +1,4 @@
-# OpenModDetector
+# Open Mod Detector
 
 For several years now I've used the dependency injection library [Guice](https://github.com/google/guice). I'm trying [Dagger](https://github.com/google/dagger) for something different this time.
 
