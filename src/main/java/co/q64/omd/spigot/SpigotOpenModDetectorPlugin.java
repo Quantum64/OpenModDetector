@@ -6,6 +6,7 @@ import co.q64.omd.ModDetectorModule;
 import co.q64.omd.OpenModDetector;
 import co.q64.omd.OpenModDetectorPlugin;
 import co.q64.omd.spigot.inject.SpigotModule;
+import co.q64.omd.spigot.inject.*;
 
 public class SpigotOpenModDetectorPlugin extends JavaPlugin implements OpenModDetectorPlugin {
 	private OpenModDetector modDetector;
@@ -13,7 +14,7 @@ public class SpigotOpenModDetectorPlugin extends JavaPlugin implements OpenModDe
 	@Override
 	public void onEnable() {
 		//formatter:off
-				this.modDetector = DaggerSpigotModDetectorLoader.builder()
+				this.modDetector = DaggerSpigotComponent.builder()
 					.modDetectorModule(new ModDetectorModule())
 					.spigotModule(new SpigotModule(this))
 					.build().getOpenModDetector();

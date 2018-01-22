@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import co.q64.omd.base.util.command.ArgumentIteratorFactory;
+import co.q64.omd.base.util.ArgumentIteratorFactory;
 
 public class SpigotModListCommand implements CommandExecutor {
 	protected @Inject ArgumentIteratorFactory argumentIteratorFactory;

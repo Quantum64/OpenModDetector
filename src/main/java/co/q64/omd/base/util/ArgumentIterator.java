@@ -1,7 +1,10 @@
-package co.q64.omd.base.util.command;
+package co.q64.omd.base.util;
 
 import java.util.Iterator;
 
+import com.google.auto.factory.AutoFactory;
+
+@AutoFactory
 public class ArgumentIterator implements Iterator<String> {
 	private String[] args;
 	private int index = 0;
