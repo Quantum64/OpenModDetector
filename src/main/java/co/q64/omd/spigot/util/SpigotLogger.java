@@ -14,6 +14,8 @@ public class SpigotLogger implements Logger {
 	protected @Inject Plugin plugin;
 	private java.util.logging.Logger logger;
 
+	protected @Inject SpigotLogger() {}
+
 	@Inject
 	protected void init() {
 		logger = plugin.getLogger();

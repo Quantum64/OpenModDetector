@@ -9,18 +9,18 @@ import co.q64.omd.spigot.inject.*;
 
 public class SpigotOpenModDetectorPlugin extends JavaPlugin implements OpenModDetectorPlugin {
 	private OpenModDetector modDetector;
-	
+
 	@Override
 	public void onEnable() {
 		//formatter:off
-				this.modDetector = DaggerSpigotComponent.builder()
-					.modDetectorModule(new ModDetectorModule())
-					.spigotModule(new SpigotModule(this))
-					.build().getOpenModDetector();
-				//formatter:on
-				modDetector.enable();
+		this.modDetector = DaggerSpigotComponent.builder()
+			.modDetectorModule(new ModDetectorModule())
+			.spigotModule(new SpigotModule(this))
+			.build().getOpenModDetector();
+		//formatter:on
+		modDetector.enable();
 	}
-	
+
 	@Override
 	public void onDisable() {
 		modDetector.disable();
