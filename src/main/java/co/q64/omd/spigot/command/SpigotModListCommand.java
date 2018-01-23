@@ -1,6 +1,7 @@
 package co.q64.omd.spigot.command;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,6 +9,7 @@ import org.bukkit.command.CommandSender;
 
 import co.q64.omd.base.util.ArgumentIteratorFactory;
 
+@Singleton
 public class SpigotModListCommand implements CommandExecutor {
 	protected @Inject ArgumentIteratorFactory argumentIteratorFactory;
 	
