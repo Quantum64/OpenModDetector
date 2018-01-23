@@ -4,16 +4,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.google.auto.factory.AutoFactory;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-@AutoFactory
+@Singleton
 public class MockConfiguration implements Configuration {
 
-	protected MockConfiguration() {}
+	protected @Inject MockConfiguration() {}
 	
 	@Override
 	public Optional<Configuration> getSection(String key) {
-		return Optional.of(new MockConfiguration());
+		return Optional.of(this);
 	}
 
 	@Override

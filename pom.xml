@@ -32,6 +32,11 @@
 								<artifactId>auto-factory</artifactId>
 								<version>1.0-beta5</version>
 							</path>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>1.16.16</version>
+							</path>
 						</annotationProcessorPaths>
 						<forceJavacCompilerUse>true</forceJavacCompilerUse>
 					</configuration>

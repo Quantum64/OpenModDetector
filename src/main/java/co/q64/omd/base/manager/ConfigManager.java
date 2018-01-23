@@ -9,10 +9,12 @@ import javax.inject.Singleton;
 import co.q64.omd.base.annotation.Console;
 import co.q64.omd.base.config.Configuration;
 import co.q64.omd.base.config.ConfigurationLoader;
-import co.q64.omd.base.config.MockConfigurationFactory;
+import co.q64.omd.base.config.MockConfiguration;
+import co.q64.omd.base.util.Color;
 import co.q64.omd.base.util.Logger;
 import co.q64.omd.base.util.PluginFacade;
 import co.q64.omd.base.util.Sender;
+import lombok.Getter;
 
 @Singleton
 public class ConfigManager {
@@ -20,10 +22,10 @@ public class ConfigManager {
 
 	protected @Inject ConfigurationLoader configLoader;
 	protected @Inject PluginFacade pluginFacade;
-	protected @Inject MockConfigurationFactory mockConfigFactory;
+	protected @Inject MockConfiguration mockConfig;
 	protected @Inject Logger logger;
 
-	private Configuration config;
+	private @Getter Configuration config;
 
 	protected @Inject ConfigManager() {}
 
@@ -34,12 +36,14 @@ public class ConfigManager {
 		File file = new File(pluginFacade.getDataFolder(), fileName);
 		if (!file.exists()) {
 			logger.error("Could not save the default config! Using default config values!");
-			config = mockConfigFactory.create();
+			sender.sendMessage(Color.RED + "Could not load config! Check console for details.");
+			config = mockConfig;
 			return;
 		}
 		Optional<Configuration> opt = configLoader.load(file);
 		if (!opt.isPresent()) {
-			config = mockConfigFactory.create();
+			config = mockConfig;
+			sender.sendMessage(Color.RED + "Could not load config! Check console for details.");
 			return;
 		}
 		config = opt.get();
