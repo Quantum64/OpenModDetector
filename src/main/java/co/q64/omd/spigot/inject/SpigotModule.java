@@ -1,5 +1,7 @@
 package co.q64.omd.spigot.inject;
 
+import lombok.AllArgsConstructor;
+
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -9,12 +11,9 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
+@AllArgsConstructor
 public class SpigotModule {
 	private JavaPlugin plugin;
-
-	public SpigotModule(JavaPlugin plugin) {
-		this.plugin = plugin;
-	}
 
 	protected @Provides JavaPlugin getJavaPlugin() {
 		return plugin;
