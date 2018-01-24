@@ -31,4 +31,7 @@ public class MockSender implements PlayerSender {
 	public UUID getUUID() {
 		return UUID.randomUUID();
 	}
+
+	@Override
+	public void sendPluginMessage(String channel, byte[] message) {}
 }

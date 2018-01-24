@@ -22,6 +22,7 @@ import dagger.Component;
 		SpigotModule.class, 
 		SpigotBinders.class,
 		SpigotListeners.class,
+		SpigotCommands.class,
 		
 		// External Dependencies
 		HikariBindings.class

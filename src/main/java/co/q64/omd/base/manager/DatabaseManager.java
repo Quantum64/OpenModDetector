@@ -15,12 +15,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import co.q64.omd.base.annotation.Console;
+import co.q64.omd.base.config.Reloadable;
 import co.q64.omd.base.database.ConnectionPool;
 import co.q64.omd.base.database.ConnectionPoolFactory;
 import co.q64.omd.base.database.DatabaseConfigWrapper;
 import co.q64.omd.base.database.DatabaseConfigWrapperFactory;
 import co.q64.omd.base.objects.Mod;
-import co.q64.omd.base.util.Color;
+import co.q64.omd.base.util.ChatUtil;
 import co.q64.omd.base.util.Logger;
 import co.q64.omd.base.util.ModContainer;
 import co.q64.omd.base.util.PlayerSender;
@@ -28,11 +29,12 @@ import co.q64.omd.base.util.Sender;
 import lombok.Getter;
 
 @Singleton
-public class DatabaseManager {
+public class DatabaseManager implements Reloadable {
 	protected @Inject ConnectionPoolFactory connectionPoolFactory;
 	protected @Inject DatabaseConfigWrapperFactory configFactory;
 	protected @Inject ModContainer modContainer;
 	protected @Inject Logger logger;
+	protected @Inject ChatUtil chatUtil;
 
 	private @Getter boolean useDatabase;
 	private List<UUID> pendingTransactions = new CopyOnWriteArrayList<UUID>();
@@ -61,7 +63,7 @@ public class DatabaseManager {
 		}, 3L, 3L, TimeUnit.SECONDS);
 	}
 
-	public void onPlayerJoin(PlayerSender player) {
+	protected void onPlayerJoin(PlayerSender player) {
 
 	}
 
@@ -69,6 +71,7 @@ public class DatabaseManager {
 		pendingTransactions.add(player);
 	}
 
+	@Override
 	@Inject
 	public void reload(@Console Sender sender) {
 		DatabaseConfigWrapper config = configFactory.create();
@@ -80,7 +83,7 @@ public class DatabaseManager {
 				connections.getConnection();
 			} catch (Exception e) {
 				logger.error("Could not connect to database!", e);
-				sender.sendMessage(Color.RED + "Could not connect to database! Some features will be disabled.");
+				sender.sendMessage(chatUtil.prefix() + "Could not connect to database! Some features will be disabled.");
 				useDatabase = false;
 			}
 		}

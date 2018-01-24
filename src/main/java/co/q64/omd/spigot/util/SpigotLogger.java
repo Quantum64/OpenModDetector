@@ -11,6 +11,8 @@ import co.q64.omd.base.util.Logger;
 
 @Singleton
 public class SpigotLogger implements Logger {
+	private static final String PREFIX = "[ModDetector] ";
+
 	protected @Inject Plugin plugin;
 	private java.util.logging.Logger logger;
 
@@ -23,17 +25,17 @@ public class SpigotLogger implements Logger {
 
 	@Override
 	public void info(String message) {
-		logger.info(message);
+		logger.info(PREFIX + message);
 	}
 
 	@Override
 	public void error(String message) {
-		logger.severe(message);
+		logger.severe(PREFIX + message);
 	}
 
 	@Override
 	public void error(String message, Throwable t) {
-		logger.log(Level.SEVERE, message, t);
+		logger.log(Level.SEVERE, PREFIX + message, t);
 	}
 
 	@Override
@@ -43,6 +45,6 @@ public class SpigotLogger implements Logger {
 
 	@Override
 	public void warn(String message, Throwable t) {
-		logger.log(Level.WARNING, message, t);
+		logger.log(Level.WARNING, PREFIX + message, t);
 	}
 }

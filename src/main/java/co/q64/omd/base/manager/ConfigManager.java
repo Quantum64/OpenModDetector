@@ -10,6 +10,7 @@ import co.q64.omd.base.annotation.Console;
 import co.q64.omd.base.config.Configuration;
 import co.q64.omd.base.config.ConfigurationLoader;
 import co.q64.omd.base.config.MockConfiguration;
+import co.q64.omd.base.config.Reloadable;
 import co.q64.omd.base.util.Color;
 import co.q64.omd.base.util.Logger;
 import co.q64.omd.base.util.PluginFacade;
@@ -17,7 +18,7 @@ import co.q64.omd.base.util.Sender;
 import lombok.Getter;
 
 @Singleton
-public class ConfigManager {
+public class ConfigManager implements Reloadable {
 	private static final String FILE_NAME = "config";
 
 	protected @Inject ConfigurationLoader configLoader;
@@ -30,6 +31,7 @@ public class ConfigManager {
 	protected @Inject ConfigManager() {}
 
 	@Inject
+	@Override
 	public void reload(@Console Sender sender) {
 		String fileName = FILE_NAME + configLoader.getFileExtension();
 		pluginFacade.saveResource(fileName);
