@@ -1,5 +1,7 @@
 package co.q64.omd.base.util;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,5 +25,10 @@ public class MockSender implements PlayerSender {
 	@Override
 	public boolean hasPermission(Permission permission) {
 		return false;
+	}
+
+	@Override
+	public UUID getUUID() {
+		return UUID.randomUUID();
 	}
 }

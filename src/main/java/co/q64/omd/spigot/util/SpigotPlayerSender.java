@@ -1,5 +1,7 @@
 package co.q64.omd.spigot.util;
 
+import java.util.UUID;
+
 import org.bukkit.entity.Player;
 
 import com.google.auto.factory.AutoFactory;
@@ -18,5 +20,10 @@ public class SpigotPlayerSender extends SpigotCommandSender implements PlayerSen
 	@Override
 	public void kick(String reason) {
 		player.kickPlayer(reason);
+	}
+
+	@Override
+	public UUID getUUID() {
+		return player.getUniqueId();
 	}
 }
