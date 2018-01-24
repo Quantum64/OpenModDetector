@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -32,6 +33,15 @@ public class ModContainer {
 		if (mods == null) {
 			mods = new ArrayList<Mod>();
 			internal.put(id, mods);
+		}
+		for (Iterator<Mod> itr = mods.iterator(); itr.hasNext();) {
+			Mod current = itr.next();
+			if (current.getName().equalsIgnoreCase(mod.getName())) {
+				if ((mod.getVersion().length() <= current.getVersion().length()) || current.getLogin() > mod.getLogin()) {
+					return;
+				}
+				itr.remove();
+			}
 		}
 		mods.add(mod);
 	}
