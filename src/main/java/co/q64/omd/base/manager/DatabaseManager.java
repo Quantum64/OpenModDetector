@@ -1,8 +1,15 @@
 package co.q64.omd.base.manager;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -28,17 +35,38 @@ public class DatabaseManager {
 	protected @Inject Logger logger;
 
 	private @Getter boolean useDatabase;
+	private List<UUID> pendingTransactions = new CopyOnWriteArrayList<UUID>();
+	private ScheduledExecutorService sceduler = Executors.newSingleThreadScheduledExecutor();
 	private ExecutorService pool = Executors.newCachedThreadPool();
 	private ConnectionPool connections;
 
-	protected @Inject DatabaseManager() {}
+	protected @Inject DatabaseManager() {
+		final List<UUID> lock = new ArrayList<UUID>(pendingTransactions);
+		final long now = System.currentTimeMillis();
+		pendingTransactions.clear();
+		sceduler.scheduleAtFixedRate(() -> {
+			pool.submit(() -> {
+				for (UUID player : lock) {
+					StringBuilder sb = new StringBuilder();
+					List<Mod> mods = modContainer.getMods(player).stream().filter(mod -> mod.getLogin() > now - TimeUnit.DAYS.toMillis(30)).collect(Collectors.toList());
+					for (Iterator<Mod> itr = mods.iterator(); itr.hasNext();) {
+						Mod mod = itr.next();
+						sb.append(mod.encode());
+						if (itr.hasNext()) {
+							sb.append("^");
+						}
+					}
+				}
+			});
+		}, 3L, 3L, TimeUnit.SECONDS);
+	}
 
 	public void onPlayerJoin(PlayerSender player) {
 
 	}
 
-	public void onModUpdate(UUID player, Mod mod) {
-
+	public void onModUpdate(UUID player) {
+		pendingTransactions.add(player);
 	}
 
 	@Inject

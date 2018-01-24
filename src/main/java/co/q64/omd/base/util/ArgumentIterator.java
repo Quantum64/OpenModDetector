@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import com.google.auto.factory.AutoFactory;
 
-@AutoFactory
+@AutoFactory(implementing = ArgumentIteratorDefinition.class)
 public class ArgumentIterator implements Iterator<String> {
 	private String[] args;
 	private int index = 0;

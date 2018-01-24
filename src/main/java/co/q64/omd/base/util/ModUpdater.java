@@ -1,7 +1,6 @@
 package co.q64.omd.base.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -19,16 +18,12 @@ public class ModUpdater {
 
 	public void addMod(UUID id, Mod mod) {
 		container.addMod(id, mod);
-		databaseManager.onModUpdate(id, mod);
+		databaseManager.onModUpdate(id);
 	}
 
 	public void addMods(UUID id, Collection<Mod> mods) {
 		for (Mod m : mods) {
 			addMod(id, m);
 		}
-	}
-
-	public List<Mod> getMods(UUID id) {
-		return container.getMods(id);
 	}
 }
