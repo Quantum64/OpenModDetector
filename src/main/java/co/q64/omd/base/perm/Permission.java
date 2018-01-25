@@ -3,7 +3,7 @@ package co.q64.omd.base.perm;
 import com.google.auto.factory.AutoFactory;
 import com.google.auto.factory.Provided;
 
-import co.q64.omd.base.annotation.BasePermissionNode;
+import co.q64.omd.base.binders.ConstantBinders.BasePermissionNode;
 import co.q64.omd.base.util.Sender;
 
 @AutoFactory

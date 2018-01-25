@@ -1,6 +1,7 @@
 package co.q64.omd.base.detection;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,19 +11,39 @@ import javax.inject.Singleton;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 
+import co.q64.omd.base.objects.Mod;
+import co.q64.omd.base.objects.ModFactory;
+import co.q64.omd.base.type.ModType;
+import co.q64.omd.base.util.ByteBufUtil;
 import co.q64.omd.base.util.ModUpdater;
 import co.q64.omd.base.util.PlayerSender;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
 @Singleton
 public class ForgeDetector implements Detector {
 	protected @Inject ModUpdater updater;
+	protected @Inject ByteBufUtil byteBufUtils;
+	protected @Inject ModFactory modFactory;
 
 	protected @Inject ForgeDetector() {}
 
 	@Override
 	public void processPluginMessage(PlayerSender player, String channel, byte[] message) {
-
+		if (channel.equals("FML|HS")) {
+			ByteBuf b = Unpooled.copiedBuffer(message);
+			switch (b.readByte()) {
+			case 2:
+				int modCount = byteBufUtils.readVarInt(b, 2);
+				for (int i = 0; i < modCount; i++) {
+					String name = byteBufUtils.readUTF8String(b);
+					String version = byteBufUtils.readUTF8String(b);
+					Mod mod = modFactory.create(name, version, ModType.FORGE);
+					updater.addMod(player.getUUID(), mod);
+				}
+				break;
+			}
+		}
 	}
 
 	@Override

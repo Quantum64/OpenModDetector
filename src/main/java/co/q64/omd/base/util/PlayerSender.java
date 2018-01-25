@@ -8,4 +8,6 @@ public interface PlayerSender extends Sender {
 	public UUID getUUID();
 
 	public void sendPluginMessage(String channel, byte[] message);
+	
+	public boolean isOnline();
 }

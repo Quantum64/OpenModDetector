@@ -12,15 +12,9 @@ public class MockSender implements PlayerSender {
 	protected @Inject MockSender() {}
 
 	@Override
-	public void sendMessage(String message) {}
-
-	@Override
 	public String getName() {
 		return "Offline";
 	}
-
-	@Override
-	public void kick(String reason) {}
 
 	@Override
 	public boolean hasPermission(Permission permission) {
@@ -33,5 +27,19 @@ public class MockSender implements PlayerSender {
 	}
 
 	@Override
+	public boolean isOnline() {
+		return false;
+	}
+
+	@Override
 	public void sendPluginMessage(String channel, byte[] message) {}
+
+	@Override
+	public void sendFormatted(String message) {}
+
+	@Override
+	public void kick(String reason) {}
+
+	@Override
+	public void sendMessage(String message) {}
 }

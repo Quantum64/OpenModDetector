@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.q64.omd.base.binders.ConstantBinders.ModListCommandName;
 import co.q64.omd.base.detection.Detector;
 import co.q64.omd.base.util.ArgumentIterator;
 import co.q64.omd.base.util.ArgumentIteratorFactory;
@@ -12,6 +13,7 @@ import co.q64.omd.base.util.ModContainer;
 import co.q64.omd.base.util.PlayerSender;
 import co.q64.omd.base.util.PluginFacade;
 import co.q64.omd.base.util.Sender;
+import co.q64.omd.base.util.SenderFactory;
 
 @Singleton
 public class ModManager {
@@ -20,16 +22,22 @@ public class ModManager {
 	protected @Inject PluginFacade plugin;
 	protected @Inject DatabaseManager databaseManager;
 	protected @Inject ArgumentIteratorFactory iteratorFactory;
+	protected @Inject SenderFactory factory;
+
+	protected @Inject @ModListCommandName String modListCommand;
 
 	protected @Inject ModManager() {}
 
 	public void listMods(Sender sender, String[] argArray) {
 		ArgumentIterator args = iteratorFactory.create(argArray);
 		if (args.hasNext()) {
-
-		} else {
-			
+			PlayerSender target = factory.getSender(args.next());
+			if(!target.isOnline()) {
+				
+			}
+			return;
 		}
+		sender.sendFormatted("Format: /" + modListCommand + " <player>");
 	}
 
 	public void onPlayerJoin(PlayerSender player) {

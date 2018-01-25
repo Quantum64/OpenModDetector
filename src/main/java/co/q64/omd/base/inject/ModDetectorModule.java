@@ -1,7 +1,14 @@
 package co.q64.omd.base.inject;
 
-import co.q64.omd.base.annotation.BasePermissionNode;
 import co.q64.omd.base.annotation.Mock;
+import co.q64.omd.base.binders.ConstantBinders.AllModsCommandName;
+import co.q64.omd.base.binders.ConstantBinders.Author;
+import co.q64.omd.base.binders.ConstantBinders.BasePermissionNode;
+import co.q64.omd.base.binders.ConstantBinders.LastModsCommandName;
+import co.q64.omd.base.binders.ConstantBinders.ModHistoryCommandName;
+import co.q64.omd.base.binders.ConstantBinders.ModListCommandName;
+import co.q64.omd.base.binders.ConstantBinders.Name;
+import co.q64.omd.base.binders.ConstantBinders.ReloadCommandName;
 import co.q64.omd.base.binders.ConstantPool;
 import co.q64.omd.base.config.Configuration;
 import co.q64.omd.base.config.MockConfiguration;
@@ -27,5 +34,33 @@ public class ModDetectorModule {
 
 	protected @Provides @BasePermissionNode String getBasePermissionNode() {
 		return ConstantPool.BASE_PERMISSION_NODE;
+	}
+
+	protected @Provides @ModListCommandName String getModListCommandName() {
+		return ConstantPool.MODLIST_COMMAND;
+	}
+
+	protected @Provides @ModHistoryCommandName String getModHistoryCommandName() {
+		return ConstantPool.MODHISTORY_COMMAND;
+	}
+
+	protected @Provides @LastModsCommandName String getLastModsCommandName() {
+		return ConstantPool.LASTMODS_COMMAND;
+	}
+
+	protected @Provides @AllModsCommandName String getAllModsCommandName() {
+		return ConstantPool.ALLMODS_COMMAND;
+	}
+
+	protected @Provides @ReloadCommandName String getReloadCommandName() {
+		return ConstantPool.RELOAD_COMMAND;
+	}
+
+	protected @Provides @Name String getPluginName() {
+		return ConstantPool.NAME;
+	}
+	
+	protected @Provides @Author String getPluginAuthor() {
+		return ConstantPool.AUTHOR;
 	}
 }

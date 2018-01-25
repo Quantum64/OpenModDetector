@@ -4,10 +4,12 @@ import co.q64.omd.OpenModDetector;
 import co.q64.omd.base.config.ConfigurationLoader;
 import co.q64.omd.base.util.Logger;
 import co.q64.omd.base.util.PluginFacade;
+import co.q64.omd.base.util.SenderFactory;
 import co.q64.omd.spigot.SpigotModDetector;
 import co.q64.omd.spigot.config.SpigotConfigurationLoader;
 import co.q64.omd.spigot.util.SpigotLogger;
 import co.q64.omd.spigot.util.SpigotPluginFacade;
+import co.q64.omd.spigot.util.SpigotSenderFactory;
 import dagger.Binds;
 import dagger.Module;
 
@@ -20,4 +22,6 @@ public interface SpigotBinders {
 	public @Binds ConfigurationLoader configurationLoader(SpigotConfigurationLoader spigotConfigurationLoader);
 
 	public @Binds PluginFacade pluginFacade(SpigotPluginFacade spigotPluginFacade);
+	
+	public @Binds SenderFactory senderFactory(SpigotSenderFactory spigotSenderFactory);
 }

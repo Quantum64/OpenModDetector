@@ -17,11 +17,20 @@ public class SpigotSenderFactory implements SenderFactory {
 	protected @Inject SpigotPlayerSenderFactory factory;
 	protected @Inject MockSender mock;
 	
-	protected SpigotSenderFactory() {}
+	protected @Inject SpigotSenderFactory() {}
 
 	@Override
 	public PlayerSender getSender(UUID id) {
 		Player p = Bukkit.getPlayer(id);
+		if(p == null) {
+			return mock;
+		}
+		return factory.create(p);
+	}
+
+	@Override
+	public PlayerSender getSender(String name) {
+		Player p = Bukkit.getPlayer(name);
 		if(p == null) {
 			return mock;
 		}

@@ -22,6 +22,13 @@ public class ConsoleEnhancedSender implements Sender {
 	}
 
 	@Override
+	public void sendFormatted(String message) {
+		for (Sender s : senders) {
+			s.sendFormatted(message);
+		}
+	}
+
+	@Override
 	public String getName() {
 		return senders[0].getName();
 	}
