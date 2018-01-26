@@ -6,22 +6,22 @@ import javax.inject.Singleton;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import co.q64.omd.base.binders.ConstantBinders.ModListCommandName;
+import co.q64.omd.base.binders.ConstantBinders.ModFiltersCommandName;
 import co.q64.omd.base.manager.ModManager;
 import co.q64.omd.spigot.util.SpigotCommandSenderFactory;
 import lombok.Getter;
 
 @Singleton
-public class SpigotModListCommand implements SpigotCommand {
+public class SpigotListFiltersCommand implements SpigotCommand {
 	protected @Inject ModManager modManager;
 	protected @Inject SpigotCommandSenderFactory factory;
-	protected @Inject @Getter @ModListCommandName String name;
+	protected @Inject @Getter @ModFiltersCommandName String name;
 
-	protected @Inject SpigotModListCommand() {}
+	protected @Inject SpigotListFiltersCommand() {}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String l, String[] args) {
-		modManager.modListCommand(factory.create(sender), args);
+		modManager.listFiltersCommand(factory.create(sender));
 		return true;
 	}
 }

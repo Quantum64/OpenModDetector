@@ -1,4 +1,10 @@
+blockers:
+  schematica-printer: true
+  schematica-load: true
+  schematica-save: true
+
 database:
+  use-database: false
   username: root
   password: password
   database: ModDetector

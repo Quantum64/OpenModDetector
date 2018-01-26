@@ -10,10 +10,10 @@ import co.q64.omd.base.config.MockConfiguration;
 import co.q64.omd.base.manager.ConfigManager;
 
 @AutoFactory
-public class DatabaseConfigWrapper {
+public class DatabaseConfig {
 	private Configuration config;
 
-	protected DatabaseConfigWrapper(@Provided ConfigManager manager, @Provided MockConfiguration mock) {
+	protected DatabaseConfig(@Provided ConfigManager manager, @Provided MockConfiguration mock) {
 		Optional<Configuration> opt = manager.getConfig().getSection("database");
 		if (!opt.isPresent()) {
 			config = mock;

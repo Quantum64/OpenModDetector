@@ -4,7 +4,7 @@ import co.q64.omd.base.annotation.Mock;
 import co.q64.omd.base.binders.ConstantBinders.AllModsCommandName;
 import co.q64.omd.base.binders.ConstantBinders.Author;
 import co.q64.omd.base.binders.ConstantBinders.BasePermissionNode;
-import co.q64.omd.base.binders.ConstantBinders.LastModsCommandName;
+import co.q64.omd.base.binders.ConstantBinders.ModFiltersCommandName;
 import co.q64.omd.base.binders.ConstantBinders.ModHistoryCommandName;
 import co.q64.omd.base.binders.ConstantBinders.ModListCommandName;
 import co.q64.omd.base.binders.ConstantBinders.Name;
@@ -44,10 +44,6 @@ public class ModDetectorModule {
 		return ConstantPool.MODHISTORY_COMMAND;
 	}
 
-	protected @Provides @LastModsCommandName String getLastModsCommandName() {
-		return ConstantPool.LASTMODS_COMMAND;
-	}
-
 	protected @Provides @AllModsCommandName String getAllModsCommandName() {
 		return ConstantPool.ALLMODS_COMMAND;
 	}
@@ -56,10 +52,14 @@ public class ModDetectorModule {
 		return ConstantPool.RELOAD_COMMAND;
 	}
 
+	protected @Provides @ModFiltersCommandName String getModFiltersCommandName() {
+		return ConstantPool.MODFILTERS_COMMAND;
+	}
+
 	protected @Provides @Name String getPluginName() {
 		return ConstantPool.NAME;
 	}
-	
+
 	protected @Provides @Author String getPluginAuthor() {
 		return ConstantPool.AUTHOR;
 	}

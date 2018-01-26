@@ -37,13 +37,17 @@ public class ModContainer {
 		for (Iterator<Mod> itr = mods.iterator(); itr.hasNext();) {
 			Mod current = itr.next();
 			if (current.getName().equalsIgnoreCase(mod.getName())) {
-				if ((mod.getVersion().length() <= current.getVersion().length()) || current.getLogin() > mod.getLogin()) {
+				if ((mod.getVersion().length() <= current.getVersion().length()) || current.getLogin() > mod.getLogin() || current.isCurrent()) {
 					return;
 				}
 				itr.remove();
 			}
 		}
 		mods.add(mod);
+	}
+	
+	public Map<UUID, List<Mod>> getMods() {
+		return internal;
 	}
 
 	public void addMods(UUID id, Collection<Mod> mods) {

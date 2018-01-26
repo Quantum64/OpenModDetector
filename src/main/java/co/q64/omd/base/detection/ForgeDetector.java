@@ -1,7 +1,6 @@
 package co.q64.omd.base.detection;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
